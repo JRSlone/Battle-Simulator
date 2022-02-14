@@ -11,8 +11,9 @@ namespace Battle_Simulator
         public void TurnCombat()
         {
             // needs both players to choose then attacks happen to calculate the bonuses to attack ((FIXED kinda))
-            // enemy copies the same move as me at first then just uses that move OVER AND OVER so look into that ((FIXED))
+            // enemy copies the same move as me at first then just uses that move OVER AND OVER so look into that ((FIXED? though have questions))
             // look into "break" for exiting while loop? Might do what i need.
+            // add a play again /exit stuff to fufill ((Master Loop))
 
             Random random = new Random();
 
@@ -28,7 +29,7 @@ namespace Battle_Simulator
             Console.WriteLine("Sword beats Axe, Axe beats Lance, and Lance beats Sword. Granting an added 3 damage when attacking with a favored weapon type");
             while (playerHp > 0 && enemyHP > 0)
             {
-                //enemyChoice = random.Next(0, 2); //I dont need this here I guess since its defined above?
+                enemyChoice = random.Next(0, 2); //I dont need this here I guess since its defined above?
                 // ----------------Player Turn
                 Console.WriteLine("-----Players Turn-----");
                 Console.WriteLine("Player HP: " + playerHp + ". Enemy HP: " + enemyHP);
@@ -135,6 +136,12 @@ namespace Battle_Simulator
                 Console.WriteLine("You Tied");
             }
             Console.ReadKey();
+            Ending();
+        }
+
+        public static void Ending()
+        {
+            Console.WriteLine("Thanks for Playing!!");
         }
     }
 }
