@@ -12,8 +12,8 @@ namespace Battle_Simulator
         {
             // needs both players to choose then attacks happen to calculate the bonuses to attack ((FIXED kinda))
             // enemy copies the same move as me at first then just uses that move OVER AND OVER so look into that ((FIXED? though have questions))
-            // look into "break" for exiting while loop? Might do what i need.
-            // add a play again /exit stuff to fufill ((Master Loop))
+            // look into "break" for exiting while loop? Might do what i need. ((used goto instead))
+            // add a play again /exit stuff to fufill ((Master Loop)) ((Complete, ask if other ways instead of goto))
 
             Random random = new Random();
 
@@ -24,7 +24,6 @@ namespace Battle_Simulator
             int swordAtk = 5;
             int axeAtk = 5;
             int lanceAtk = 5;
-
 
             Console.WriteLine("Sword beats Axe, Axe beats Lance, and Lance beats Sword. Granting an added 3 damage when attacking with a favored weapon type");
             while (playerHp > 0 && enemyHP > 0)
@@ -75,7 +74,7 @@ namespace Battle_Simulator
                     }
                 }
 
-                //Sword beats Axe, Axe beats Lance, and Lance beats Sword.
+                //Sword beats Axe, Axe beats Lance, and Lance beats Sword. Maybe add something more interesting for combat then just Rock Paper Scissors?
                 if (choice == "s" && enemyChoice == 0)
                 {
                     playerHp -= swordAtk;
@@ -133,15 +132,9 @@ namespace Battle_Simulator
             }
             else
             {
-                Console.WriteLine("You Tied");
+                Console.WriteLine("You Tied"); //have no concept whether i can tie right now so look into that, do attacks occur at the same time?? i believe so???????????
             }
             Console.ReadKey();
-            Ending();
-        }
-
-        public static void Ending()
-        {
-            Console.WriteLine("Thanks for Playing!!");
         }
     }
 }
