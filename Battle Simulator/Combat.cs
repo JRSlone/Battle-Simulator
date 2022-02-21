@@ -11,15 +11,15 @@ namespace Battle_Simulator
         public void TurnCombat(Player player1, Enemy enemy0)
         {
             // needs both players to choose then attacks happen to calculate the bonuses to attack ((FIXED kinda))
-            // enemy copies the same move as me at first then just uses that move OVER AND OVER so look into that ((FIXED? though have questions))
+            // enemy copies the same move as me at first then just uses that move OVER AND OVER so look into that ((FIXED?))
             // look into "break" for exiting while loop? Might do what i need. ((used goto instead))
             // add a play again /exit stuff to fufill ((Master Loop)) ((Complete, ask if other ways instead of goto))
 
             Random random = new Random();
 
-            //int player1.Hp = 50; no longer needed, replayed with player class
-            //int enemy0.enemyHp = 50; 
-            int enemyChoice = random.Next(0, 2); //this will cover for everything
+            //int player1.Hp = 50; //no longer needed, replaced with Player class
+            //int enemy0.enemyHp = 50; //no longer needed, replaced with Enemy class
+            int enemyChoice = random.Next(0, 2); //this will cover for everything dont think i need it in the while loop..
 
             int swordAtk = 5;
             int axeAtk = 5;
