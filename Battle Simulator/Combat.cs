@@ -8,7 +8,7 @@ namespace Battle_Simulator
 {
     class Combat
     {
-        public void TurnCombat()
+        public void TurnCombat(Player player1, Enemy enemy0)
         {
             // needs both players to choose then attacks happen to calculate the bonuses to attack ((FIXED kinda))
             // enemy copies the same move as me at first then just uses that move OVER AND OVER so look into that ((FIXED? though have questions))
@@ -17,8 +17,8 @@ namespace Battle_Simulator
 
             Random random = new Random();
 
-            int playerHp = 50;
-            int enemyHP = 50; 
+            //int player1.Hp = 50; no longer needed, replayed with player class
+            //int enemy0.enemyHp = 50; 
             int enemyChoice = random.Next(0, 2); //this will cover for everything
 
             int swordAtk = 5;
@@ -26,12 +26,12 @@ namespace Battle_Simulator
             int lanceAtk = 5;
 
             Console.WriteLine("Sword beats Axe, Axe beats Lance, and Lance beats Sword. Granting an added 3 damage when attacking with a favored weapon type");
-            while (playerHp > 0 && enemyHP > 0)
+            while (player1.Hp > 0 && enemy0.enemyHp > 0)
             {
                 enemyChoice = random.Next(0, 2); //I dont need this here I guess since its defined above?
                 // ----------------Player Turn
                 Console.WriteLine("-----Players Turn-----");
-                Console.WriteLine("Player HP: " + playerHp + ". Enemy HP: " + enemyHP);
+                Console.WriteLine("Player HP: " + player1.Hp + ". Enemy HP: " + enemy0.enemyHp);
                 Console.WriteLine("Enter 's' to attack with Sword, 'a' to attack with Axe, or 'l' to attack with lance.");
 
                 string choice = Console.ReadLine();
@@ -54,10 +54,10 @@ namespace Battle_Simulator
                 }
 
                 // ----------------Enemy Turn
-                if (enemyHP > 0)
+                if (enemy0.enemyHp > 0)
                 {
                     Console.WriteLine("-----Enemy Turn-----");
-                    Console.WriteLine("Player HP: " + playerHp + ". Enemy HP: " + enemyHP);
+                    Console.WriteLine("Player HP: " + player1.Hp + ". Enemy HP: " + enemy0.enemyHp);
                     // int enemyChoice = random.Next(0, 2); //Dont need this here either.
 
                     if (enemyChoice == 0)
@@ -75,58 +75,59 @@ namespace Battle_Simulator
                 }
 
                 //Sword beats Axe, Axe beats Lance, and Lance beats Sword. Maybe add something more interesting for combat then just Rock Paper Scissors?
+                //Look at switch statement to replace if/else if
                 if (choice == "s" && enemyChoice == 0)
                 {
-                    playerHp -= swordAtk;
-                    enemyHP -= swordAtk;
+                    player1.Hp -= swordAtk;
+                    enemy0.enemyHp -= swordAtk;
                 }
                 else if (choice == "s" && enemyChoice == 1)
                 {
-                    playerHp -= axeAtk;
-                    enemyHP -= swordAtk + 3;
+                    player1.Hp -= axeAtk;
+                    enemy0.enemyHp -= swordAtk + 3;
                 }
                 else if (choice == "s" && enemyChoice == 2)
                 {
-                    playerHp -= lanceAtk + 3;
-                    enemyHP -= swordAtk;
+                    player1.Hp -= lanceAtk + 3;
+                    enemy0.enemyHp -= swordAtk;
                 }
                 else if (choice == "a" && enemyChoice == 0)
                 {
-                    playerHp -= swordAtk + 3;
-                    enemyHP -= axeAtk;
+                    player1.Hp -= swordAtk + 3;
+                    enemy0.enemyHp -= axeAtk;
                 }
                 else if (choice == "a" && enemyChoice == 1)
                 {
-                    playerHp -= axeAtk;
-                    enemyHP -= axeAtk;
+                    player1.Hp -= axeAtk;
+                    enemy0.enemyHp -= axeAtk;
                 }
                 else if (choice == "a" && enemyChoice == 2)
                 {
-                    playerHp -= lanceAtk;
-                    enemyHP -= axeAtk + 3;
+                    player1.Hp -= lanceAtk;
+                    enemy0.enemyHp -= axeAtk + 3;
                 }
                 else if (choice == "l" && enemyChoice == 0)
                 {
-                    playerHp -= swordAtk;
-                    enemyHP -= lanceAtk + 3;
+                    player1.Hp -= swordAtk;
+                    enemy0.enemyHp -= lanceAtk + 3;
                 }
                 else if (choice == "l" && enemyChoice == 1)
                 {
-                    playerHp -= axeAtk + 3;
-                    enemyHP -= lanceAtk;
+                    player1.Hp -= axeAtk + 3;
+                    enemy0.enemyHp -= lanceAtk;
                 }
                 else if (choice == "l" && enemyChoice == 2)
                 {
-                    playerHp -= lanceAtk;
-                    enemyHP -= lanceAtk;
+                    player1.Hp -= lanceAtk;
+                    enemy0.enemyHp -= lanceAtk;
                 }
             }
 
-            if (playerHp <= 0 && enemyHP > 0)
+            if (player1.Hp <= 0 && enemy0.enemyHp > 0)
             {
                 Console.WriteLine("You Lose");
             }
-            else if (playerHp > 0 && enemyHP <= 0)
+            else if (player1.Hp > 0 && enemy0.enemyHp <= 0)
             {
                 Console.WriteLine("Congrats You Win!!");
             }

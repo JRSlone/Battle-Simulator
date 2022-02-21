@@ -8,8 +8,10 @@ namespace Battle_Simulator
         {
         Replay:
 
+            Player player1 = new Player("hero", 50);
+            Enemy enemy0 = new Enemy("evil", 50);
             Combat CombatSim = new Combat();
-            CombatSim.TurnCombat();
+            CombatSim.TurnCombat(player1, enemy0);
 
             Console.WriteLine("Play Again? 'Y' or 'N': ");
 
