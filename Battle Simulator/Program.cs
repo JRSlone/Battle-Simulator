@@ -6,6 +6,7 @@ namespace Battle_Simulator
     {
         static void Main(string[] args)
         {
+        //variable bool with true to replace goto
         Replay:
 
             Player player1 = new Player("hero", 50);

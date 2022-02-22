@@ -14,6 +14,11 @@ namespace Battle_Simulator
             // enemy copies the same move as me at first then just uses that move OVER AND OVER so look into that ((FIXED?))
             // look into "break" for exiting while loop? Might do what i need. ((used goto instead))
             // add a play again /exit stuff to fufill ((Master Loop)) ((Complete, ask if other ways instead of goto))
+            // add like a win and lose counter.
+            // profile for character.
+            // unit test
+            // try to figure out a save feature?????????? *json*, text or log file
+            // Console.clear(); to clear the console app instead of keeping all the history of the battles
 
             Random random = new Random();
 
