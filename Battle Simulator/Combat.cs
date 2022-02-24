@@ -26,6 +26,7 @@ namespace Battle_Simulator
             //int enemy0.enemyHp = 50; //no longer needed, replaced with Enemy class
             int enemyChoice = random.Next(0, 2); //this will cover for everything dont think i need it in the while loop..
 
+            // replace following ints with a new weapon class
             int swordAtk = 5;
             int axeAtk = 5;
             int lanceAtk = 5;
@@ -34,7 +35,7 @@ namespace Battle_Simulator
             while (player1.Hp > 0 && enemy0.enemyHp > 0)
             {
                 enemyChoice = random.Next(0, 2); //I dont need this here I guess since its defined above?
-                // ----------------Player Turn
+                // ----------------Player Turn------------------------
                 Console.WriteLine("-----Players Turn-----");
                 Console.WriteLine("Player HP: " + player1.Hp + ". Enemy HP: " + enemy0.enemyHp);
                 Console.WriteLine("Enter 's' to attack with Sword, 'a' to attack with Axe, or 'l' to attack with lance.");
@@ -76,7 +77,7 @@ namespace Battle_Simulator
                 //    Console.WriteLine("Entry was invalid."); // need this at some point to prevent the turns from advancing and correct it. i don't remember how to do this.
                 //}
 
-                // ----------------Enemy Turn
+                // ----------------Enemy Turn------------------
                 if (enemy0.enemyHp > 0)
                 {
                     Console.WriteLine("-----Enemy Turn-----");
@@ -119,52 +120,53 @@ namespace Battle_Simulator
 
                 //Sword beats Axe, Axe beats Lance, and Lance beats Sword. Maybe add something more interesting for combat then just Rock Paper Scissors ?
                 //Look at switch statement to replace if/else if ((doesnt work))
+                // class or list to define what happens when for example a sword attacks a sword... (dictionary)
 
                 if (choice == "s" && enemyChoice == 0)
-                        {
-                            player1.Hp -= swordAtk;
-                            enemy0.enemyHp -= swordAtk;
-                        }
-                        else if (choice == "s" && enemyChoice == 1)
-                        {
-                            player1.Hp -= axeAtk;
-                            enemy0.enemyHp -= swordAtk + 3;
-                        }
-                        else if (choice == "s" && enemyChoice == 2)
-                        {
-                            player1.Hp -= lanceAtk + 3;
-                            enemy0.enemyHp -= swordAtk;
-                        }
-                        else if (choice == "a" && enemyChoice == 0)
-                        {
-                            player1.Hp -= swordAtk + 3;
-                            enemy0.enemyHp -= axeAtk;
-                        }
-                        else if (choice == "a" && enemyChoice == 1)
-                        {
-                            player1.Hp -= axeAtk;
-                            enemy0.enemyHp -= axeAtk;
-                        }
-                        else if (choice == "a" && enemyChoice == 2)
-                        {
-                            player1.Hp -= lanceAtk;
-                            enemy0.enemyHp -= axeAtk + 3;
-                        }
-                        else if (choice == "l" && enemyChoice == 0)
-                        {
-                            player1.Hp -= swordAtk;
-                            enemy0.enemyHp -= lanceAtk + 3;
-                        }
-                        else if (choice == "l" && enemyChoice == 1)
-                        {
-                            player1.Hp -= axeAtk + 3;
-                            enemy0.enemyHp -= lanceAtk;
-                        }
-                        else if (choice == "l" && enemyChoice == 2)
-                        {
-                            player1.Hp -= lanceAtk;
-                            enemy0.enemyHp -= lanceAtk;
-                        }
+                {
+                    player1.Hp -= swordAtk;
+                    enemy0.enemyHp -= swordAtk;
+                }
+                else if (choice == "s" && enemyChoice == 1)
+                {
+                    player1.Hp -= axeAtk;
+                    enemy0.enemyHp -= swordAtk + 3;
+                }
+                else if (choice == "s" && enemyChoice == 2)
+                {
+                    player1.Hp -= lanceAtk + 3;
+                    enemy0.enemyHp -= swordAtk;
+                }
+                else if (choice == "a" && enemyChoice == 0)
+                {
+                    player1.Hp -= swordAtk + 3;
+                    enemy0.enemyHp -= axeAtk;
+                }
+                else if (choice == "a" && enemyChoice == 1)
+                {
+                    player1.Hp -= axeAtk;
+                    enemy0.enemyHp -= axeAtk;
+                }
+                else if (choice == "a" && enemyChoice == 2)
+                {
+                    player1.Hp -= lanceAtk;
+                    enemy0.enemyHp -= axeAtk + 3;
+                }
+                else if (choice == "l" && enemyChoice == 0)
+                {
+                    player1.Hp -= swordAtk;
+                    enemy0.enemyHp -= lanceAtk + 3;
+                }
+                else if (choice == "l" && enemyChoice == 1)
+                {
+                    player1.Hp -= axeAtk + 3;
+                    enemy0.enemyHp -= lanceAtk;
+                }
+                else if (choice == "l" && enemyChoice == 2)
+                {
+                    player1.Hp -= lanceAtk;
+                    enemy0.enemyHp -= lanceAtk;
+                }
             }
 
             if (player1.Hp <= 0 && enemy0.enemyHp > 0)
