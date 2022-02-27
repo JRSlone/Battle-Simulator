@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Battle_Simulator
 {
@@ -6,33 +7,26 @@ namespace Battle_Simulator
     {
         static void Main(string[] args)
         {
+            Player player1 = new Player("hero", 50);
+            Enemy enemy0 = new Enemy("evil", 50);
+            Weapons weapons2 = new Weapons();
+            Combat CombatSim = new Combat();
 
-        //variable bool with true to replace goto
-        Replay:
-
-                Player player1 = new Player("hero", 50);
-                Enemy enemy0 = new Enemy("evil", 50);
-                Combat CombatSim = new Combat();
+            while (CombatSim.choice != "exit")
+            {
+                player1.Hp = 50;
+                enemy0.enemyHp = 50;
                 CombatSim.TurnCombat(player1, enemy0);
+               
+                Console.WriteLine("To play again press any button, or type 'exit' to Exit: ");
+                CombatSim.choice = Console.ReadLine();
 
-            Console.WriteLine("Play Again? 'Y' or 'N': ");
-
-            string ReplayOrExit = Console.ReadLine();
-
-            if (ReplayOrExit == "Y")
-            {
-                goto Replay;
-            }
-            else
-            {
-                Ending();
             }
 
-        }
-        
-        public static void Ending()
-        {
-            Console.WriteLine("Thanks for Playing!");
+            CombatSim.choice = "exit";
+
+
+
         }
     }
 }
