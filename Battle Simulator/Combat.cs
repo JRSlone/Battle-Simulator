@@ -10,19 +10,10 @@ namespace Battle_Simulator
     {
         public string choice;
         public void TurnCombat(Player player1, Enemy enemy0)//, Weapons weapons2)
-        {
-            // add like a win and lose counter.
-            // profile for character.
-            // unit test
-            // try to figure out a save feature?????????? *json*, text or log file
-            // Console.clear(); to clear the console app instead of keeping all the history of the battles
-
+        { 
             Random random = new Random();
 
             int enemyChoice;
-
-            // replace following ints with a new weapon class
-            //int swordA = weapons2.allWeapons[0]; //NOT WORKING
 
             int swordAtk = 5;
             int axeAtk = 5;
@@ -31,7 +22,7 @@ namespace Battle_Simulator
             Console.WriteLine("Sword beats Axe, Axe beats Lance, and Lance beats Sword. Granting an added 3 damage when attacking with a favored weapon type");
             while (player1.Hp > 0 && enemy0.enemyHp > 0)
             {
-                var variable1 = "Joe"; //set so user can type
+                //var variable1 = "Joe"; //set up so player can make a name
                 enemyChoice = random.Next(0, 3);
                 // ----------------Player Turn------------------------
                 Console.WriteLine("-----Players Turn-----");
@@ -43,7 +34,8 @@ namespace Battle_Simulator
                 switch (choice)
                 {
                     case "s":
-                        Console.WriteLine($"{variable1} attack with your sword."); //example of how to fill in the user name
+                        Console.WriteLine("You attack with your sword.");
+                        //Console.WriteLine($"{variable1} attack with your sword."); //example of how to fill in the user name with variable from above
                         break;
                     case "a":
                         Console.WriteLine("You attack with your axe.");
@@ -81,7 +73,6 @@ namespace Battle_Simulator
 
                 // Sword beats Axe, Axe beats Lance, and Lance beats Sword. Maybe add something more interesting for combat then just Rock Paper Scissors ?
                 // Look at switch statement to replace if/else if ((doesnt work))
-                // class or list to define what happens when for example a sword attacks a sword... (dictionary)
 
                 if (choice == "s" && enemyChoice == 0)
                 {
@@ -146,3 +137,11 @@ namespace Battle_Simulator
         }
     }
 }
+
+// add like a win and lose counter.
+// profile for character.
+// unit test
+// try to figure out a save feature?????????? *json*, text or log file
+// Console.clear(); to clear the console app instead of keeping all the history of the battles
+
+// class or list to define what happens when for example a sword attacks a sword... (dictionary)
