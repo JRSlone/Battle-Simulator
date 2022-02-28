@@ -22,6 +22,8 @@ namespace Battle_Simulator
             int enemyChoice;
 
             // replace following ints with a new weapon class
+            //int swordA = weapons2.allWeapons[0]; //NOT WORKING
+
             int swordAtk = 5;
             int axeAtk = 5;
             int lanceAtk = 5;
