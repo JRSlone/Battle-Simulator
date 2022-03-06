@@ -7,8 +7,15 @@ namespace Battle_Simulator
     {
         static void Main(string[] args)
         {
-            Player player1 = new Player("hero", 50);
-            Enemy enemy0 = new Enemy("evil", 50);
+            Console.WriteLine("***********BATTLE SIMULATOR***********");
+
+            Console.Write("Name your Character: ");
+            String UserName = Console.ReadLine();
+            Console.Write("Name your adversary: ");
+            String EnemyName = Console.ReadLine();
+
+            Player player1 = new Player(UserName, 50);
+            Enemy enemy0 = new Enemy(EnemyName, 50);
             SwordClass sword = new SwordClass("sword", 5);
             AxeClass axe = new AxeClass("axe", 5);
             LanceClass lance = new LanceClass("lance", 5);
@@ -16,8 +23,6 @@ namespace Battle_Simulator
 
             while (CombatSim.choice != "exit")
             {
-                Console.WriteLine("***********BATTLE SIMULATOR***********");
-
                 player1.Hp = 50;
                 enemy0.enemyHp = 50;
                 CombatSim.TurnCombat(player1, enemy0, sword, axe, lance);

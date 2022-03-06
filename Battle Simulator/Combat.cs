@@ -11,30 +11,31 @@ namespace Battle_Simulator
         public string choice;
         public void TurnCombat(Player player1, Enemy enemy0, SwordClass sword, AxeClass axe, LanceClass lance)
         {
-            Console.Write("Name your Character: ");
-            String UserName = Console.ReadLine();
-            Console.Write("Name your adversary: ");
-            String EnemyName = Console.ReadLine();
-
             Random random = new Random();
             int enemyChoice;
 
+            //int winCount = 0; NOT WORKING ATM
+            //int enemyWinCount = 0;
             //use list here to reference each weapons. class for each weapon.
 
             Console.WriteLine("**************************************");
             Console.WriteLine("Welcome to Battle Simulator!");
-            Console.WriteLine($"Reduce {EnemyName}'s HP to zero!");
+            Console.WriteLine($"Reduce {enemy0.enemyName}'s HP to zero!");
             Console.WriteLine("Sword > Axe");
             Console.WriteLine("Axe > Lance");
             Console.WriteLine("Lance > Sword");
             Console.WriteLine("");
+            //Console.WriteLine("");
             while (player1.Hp > 0 && enemy0.enemyHp > 0)
             {
                 enemyChoice = random.Next(0, 3);
+
+                //Console.WriteLine($"{player1.Name}'s Wins: {winCount}");
+                //Console.WriteLine($"{enemy0.enemyName}'s Wins: {enemyWinCount}");
                 // ----------------Player Turn------------------------
-                Console.WriteLine($"-----{UserName}'s Turn-----");
-                Console.WriteLine($"{UserName} HP: {player1.Hp}");
-                Console.WriteLine($"{EnemyName} HP: {enemy0.enemyHp}");
+                Console.WriteLine($"-----{player1.Name}'s Turn-----");
+                Console.WriteLine($"{player1.Name} HP: {player1.Hp}");
+                Console.WriteLine($"{enemy0.enemyName} HP: {enemy0.enemyHp}");
                 Console.WriteLine("___________________________________");
                 Console.WriteLine("Type 's' to attack with your Sword");
                 Console.WriteLine("Type 'a' to attack with your Axe");
@@ -45,16 +46,17 @@ namespace Battle_Simulator
                 switch (choice)
                 {
                     case "s":
-                        Console.WriteLine($"{UserName} attacks with their {sword.weaponName}.");
+                        Console.WriteLine($"{player1.Name} attacks with their {sword.weaponName}.");
                         break;
                     case "a":
-                        Console.WriteLine($"{UserName} attacks with their {axe.weaponName}.");
+                        Console.WriteLine($"{player1.Name} attacks with their {axe.weaponName}.");
                         break;
                     case "l":
-                        Console.WriteLine($"{UserName} attacks with their {lance.weaponName}.");
+                        Console.WriteLine($"{player1.Name} attacks with their {lance.weaponName}.");
                         break;
                     default:
                         Console.WriteLine("Entry was invalid.");
+                        Console.WriteLine("This round will now start over.");
                         break;
 
                 }
@@ -63,20 +65,20 @@ namespace Battle_Simulator
                 if (enemy0.enemyHp > 0)
                 {
                     Console.WriteLine("");
-                    Console.WriteLine($"-----{EnemyName}'s Turn-----");
-                    Console.WriteLine($"{UserName} HP: {player1.Hp}");
-                    Console.WriteLine($"{EnemyName} HP: {enemy0.enemyHp}");
+                    Console.WriteLine($"-----{enemy0.enemyName}'s Turn-----");
+                    Console.WriteLine($"{player1.Name} HP: {player1.Hp}");
+                    Console.WriteLine($"{enemy0.enemyName} HP: {enemy0.enemyHp}");
 
                     switch(enemyChoice)
                     {
                         case 0:
-                            Console.WriteLine("Enemy attacks with their sword.");
+                            Console.WriteLine($"{enemy0.enemyName} attacks with their sword.");
                             break;
                         case 1:
-                            Console.WriteLine("Enemy attacks with their axe.");
+                            Console.WriteLine($"{enemy0.enemyName} attacks with their axe.");
                             break;
                         case 2:
-                            Console.WriteLine("Enemy attacks with their lance.");
+                            Console.WriteLine($"{enemy0.enemyName} attacks with their lance.");
                             break;
                     }
 
@@ -134,15 +136,17 @@ namespace Battle_Simulator
 
             if (player1.Hp <= 0 && enemy0.enemyHp > 0)
             {
-                Console.WriteLine($"{UserName} Loses");
+                Console.WriteLine($"{player1.Name} Loses");
+                //enemyWinCount += 1;
             }
             else if (player1.Hp > 0 && enemy0.enemyHp <= 0)
             {
-                Console.WriteLine($"Congrats you defeated {EnemyName}!");
+                Console.WriteLine($"Congrats you defeated {enemy0.enemyName}!");
+                //winCount += 1;
             }
             else
             {
-                Console.WriteLine($"{UserName} and {EnemyName} Tied");
+                Console.WriteLine($"{player1.Name} and {enemy0.enemyName} Tied");
             }
             Console.ReadKey();
         }
