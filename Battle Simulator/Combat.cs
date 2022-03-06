@@ -9,13 +9,13 @@ namespace Battle_Simulator
     class Combat
     {
         public string choice;
+        public int winCount = 0;
+        public int enemyWinCount = 0;
         public void TurnCombat(Player player1, Enemy enemy0, SwordClass sword, AxeClass axe, LanceClass lance)
         {
             Random random = new Random();
             int enemyChoice;
 
-            //int winCount = 0; NOT WORKING ATM
-            //int enemyWinCount = 0;
             //use list here to reference each weapons. class for each weapon.
 
             Console.WriteLine("**************************************");
@@ -30,8 +30,8 @@ namespace Battle_Simulator
             {
                 enemyChoice = random.Next(0, 3);
 
-                //Console.WriteLine($"{player1.Name}'s Wins: {winCount}");
-                //Console.WriteLine($"{enemy0.enemyName}'s Wins: {enemyWinCount}");
+                Console.WriteLine($"{player1.Name}'s Wins: {winCount}");
+                Console.WriteLine($"{enemy0.enemyName}'s Wins: {enemyWinCount}");
                 // ----------------Player Turn------------------------
                 Console.WriteLine($"-----{player1.Name}'s Turn-----");
                 Console.WriteLine($"{player1.Name} HP: {player1.Hp}");
@@ -137,17 +137,18 @@ namespace Battle_Simulator
             if (player1.Hp <= 0 && enemy0.enemyHp > 0)
             {
                 Console.WriteLine($"{player1.Name} Loses");
-                //enemyWinCount += 1;
+                enemyWinCount += 1;
             }
             else if (player1.Hp > 0 && enemy0.enemyHp <= 0)
             {
                 Console.WriteLine($"Congrats you defeated {enemy0.enemyName}!");
-                //winCount += 1;
+                winCount += 1;
             }
             else
             {
                 Console.WriteLine($"{player1.Name} and {enemy0.enemyName} Tied");
             }
+
             Console.ReadKey();
         }
     }
