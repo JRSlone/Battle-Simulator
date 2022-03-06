@@ -16,6 +16,8 @@ namespace Battle_Simulator
 
             while (CombatSim.choice != "exit")
             {
+                Console.WriteLine("***********BATTLE SIMULATOR***********");
+
                 player1.Hp = 50;
                 enemy0.enemyHp = 50;
                 CombatSim.TurnCombat(player1, enemy0, sword, axe, lance);

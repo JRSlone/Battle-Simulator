@@ -10,36 +10,48 @@ namespace Battle_Simulator
     {
         public string choice;
         public void TurnCombat(Player player1, Enemy enemy0, SwordClass sword, AxeClass axe, LanceClass lance)
-        { 
-            Random random = new Random();
+        {
+            Console.Write("Name your Character: ");
+            String UserName = Console.ReadLine();
+            Console.Write("Name your adversary: ");
+            String EnemyName = Console.ReadLine();
 
+            Random random = new Random();
             int enemyChoice;
- 
+
             //use list here to reference each weapons. class for each weapon.
 
-            Console.WriteLine("Sword beats Axe, Axe beats Lance, and Lance beats Sword. Granting an added 3 damage when attacking with a favored weapon type");
+            Console.WriteLine("**************************************");
+            Console.WriteLine("Welcome to Battle Simulator!");
+            Console.WriteLine($"Reduce {EnemyName}'s HP to zero!");
+            Console.WriteLine("Sword > Axe");
+            Console.WriteLine("Axe > Lance");
+            Console.WriteLine("Lance > Sword");
+            Console.WriteLine("");
             while (player1.Hp > 0 && enemy0.enemyHp > 0)
             {
-                //var variable1 = "Joe"; //set up so player can make a name
                 enemyChoice = random.Next(0, 3);
                 // ----------------Player Turn------------------------
-                Console.WriteLine("-----Players Turn-----");
-                Console.WriteLine("Player HP: " + player1.Hp + ". Enemy HP: " + enemy0.enemyHp);
-                Console.WriteLine("Enter 's' to attack with Sword, 'a' to attack with Axe, or 'l' to attack with lance.");
+                Console.WriteLine($"-----{UserName}'s Turn-----");
+                Console.WriteLine($"{UserName} HP: {player1.Hp}");
+                Console.WriteLine($"{EnemyName} HP: {enemy0.enemyHp}");
+                Console.WriteLine("___________________________________");
+                Console.WriteLine("Type 's' to attack with your Sword");
+                Console.WriteLine("Type 'a' to attack with your Axe");
+                Console.WriteLine("Type 'l' to attack with your Lance");
 
                 choice = Console.ReadLine();
 
                 switch (choice)
                 {
                     case "s":
-                        Console.WriteLine("You attack with your sword.");
-                        //Console.WriteLine($"{variable1} attack with your sword."); //example of how to fill in the user name with variable from above
+                        Console.WriteLine($"{UserName} attacks with their {sword.weaponName}.");
                         break;
                     case "a":
-                        Console.WriteLine("You attack with your axe.");
+                        Console.WriteLine($"{UserName} attacks with their {axe.weaponName}.");
                         break;
                     case "l":
-                        Console.WriteLine("You attack with your lance.");
+                        Console.WriteLine($"{UserName} attacks with their {lance.weaponName}.");
                         break;
                     default:
                         Console.WriteLine("Entry was invalid.");
@@ -50,9 +62,10 @@ namespace Battle_Simulator
                 // ----------------Enemy Turn------------------
                 if (enemy0.enemyHp > 0)
                 {
-                    Console.WriteLine("-----Enemy Turn-----");
-                    Console.WriteLine("Player HP: " + player1.Hp + ". Enemy HP: " + enemy0.enemyHp);
-                    // int enemyChoice = random.Next(0, 2); //Dont need this here either.
+                    Console.WriteLine("");
+                    Console.WriteLine($"-----{EnemyName}'s Turn-----");
+                    Console.WriteLine($"{UserName} HP: {player1.Hp}");
+                    Console.WriteLine($"{EnemyName} HP: {enemy0.enemyHp}");
 
                     switch(enemyChoice)
                     {
@@ -69,9 +82,6 @@ namespace Battle_Simulator
 
                 }
 
-                // Sword beats Axe, Axe beats Lance, and Lance beats Sword. Maybe add something more interesting for combat then just Rock Paper Scissors ?
-                // Look at switch statement to replace if/else if ((doesnt work))
-
                 if (choice == "s" && enemyChoice == 0)
                 {
                     player1.Hp -= sword.weaponDmg;
@@ -80,16 +90,16 @@ namespace Battle_Simulator
                 else if (choice == "s" && enemyChoice == 1)
                 {
                     player1.Hp -= axe.weaponDmg;
-                    enemy0.enemyHp -= sword.weaponDmg + 3;
+                    enemy0.enemyHp -= sword.weaponDmg + 5;
                 }
                 else if (choice == "s" && enemyChoice == 2)
                 {
-                    player1.Hp -= lance.weaponDmg + 3;
+                    player1.Hp -= lance.weaponDmg + 5;
                     enemy0.enemyHp -= sword.weaponDmg;
                 }
                 else if (choice == "a" && enemyChoice == 0)
                 {
-                    player1.Hp -= sword.weaponDmg + 3;
+                    player1.Hp -= sword.weaponDmg + 5;
                     enemy0.enemyHp -= axe.weaponDmg;
                 }
                 else if (choice == "a" && enemyChoice == 1)
@@ -100,16 +110,16 @@ namespace Battle_Simulator
                 else if (choice == "a" && enemyChoice == 2)
                 {
                     player1.Hp -= lance.weaponDmg;
-                    enemy0.enemyHp -= axe.weaponDmg + 3;
+                    enemy0.enemyHp -= axe.weaponDmg + 5;
                 }
                 else if (choice == "l" && enemyChoice == 0)
                 {
                     player1.Hp -= sword.weaponDmg;
-                    enemy0.enemyHp -= lance.weaponDmg + 3;
+                    enemy0.enemyHp -= lance.weaponDmg + 5;
                 }
                 else if (choice == "l" && enemyChoice == 1)
                 {
-                    player1.Hp -= axe.weaponDmg + 3;
+                    player1.Hp -= axe.weaponDmg + 5;
                     enemy0.enemyHp -= lance.weaponDmg;
                 }
                 else if (choice == "l" && enemyChoice == 2)
@@ -117,19 +127,22 @@ namespace Battle_Simulator
                     player1.Hp -= lance.weaponDmg;
                     enemy0.enemyHp -= lance.weaponDmg;
                 }
+
+                Console.WriteLine("");
+                Console.WriteLine("");
             }
 
             if (player1.Hp <= 0 && enemy0.enemyHp > 0)
             {
-                Console.WriteLine("You Lose");
+                Console.WriteLine($"{UserName} Loses");
             }
             else if (player1.Hp > 0 && enemy0.enemyHp <= 0)
             {
-                Console.WriteLine("Congrats You Win!!");
+                Console.WriteLine($"Congrats you defeated {EnemyName}!");
             }
             else
             {
-                Console.WriteLine("You Tied"); //have no concept whether i can tie right now so look into that, do attacks occur at the same time?? i believe so???????????
+                Console.WriteLine($"{UserName} and {EnemyName} Tied");
             }
             Console.ReadKey();
         }
@@ -141,5 +154,5 @@ namespace Battle_Simulator
 // unit test
 // try to figure out a save feature?????????? *json*, text or log file
 // Console.clear(); to clear the console app instead of keeping all the history of the battles
-
+// Sword beats Axe, Axe beats Lance, and Lance beats Sword. Maybe add something more interesting for combat then just Rock Paper Scissors ?
 // class or list to define what happens when for example a sword attacks a sword... (dictionary)
