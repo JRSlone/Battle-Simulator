@@ -9,15 +9,13 @@ namespace Battle_Simulator
     class Combat
     {
         public string choice;
-        public void TurnCombat(Player player1, Enemy enemy0)//, Weapons weapons2)
+        public void TurnCombat(Player player1, Enemy enemy0, SwordClass sword, AxeClass axe, LanceClass lance)
         { 
             Random random = new Random();
 
             int enemyChoice;
-
-            int swordAtk = 5;
-            int axeAtk = 5;
-            int lanceAtk = 5;
+ 
+            //use list here to reference each weapons. class for each weapon.
 
             Console.WriteLine("Sword beats Axe, Axe beats Lance, and Lance beats Sword. Granting an added 3 damage when attacking with a favored weapon type");
             while (player1.Hp > 0 && enemy0.enemyHp > 0)
@@ -76,48 +74,48 @@ namespace Battle_Simulator
 
                 if (choice == "s" && enemyChoice == 0)
                 {
-                    player1.Hp -= swordAtk;
-                    enemy0.enemyHp -= swordAtk;
+                    player1.Hp -= sword.weaponDmg;
+                    enemy0.enemyHp -= sword.weaponDmg;
                 }
                 else if (choice == "s" && enemyChoice == 1)
                 {
-                    player1.Hp -= axeAtk;
-                    enemy0.enemyHp -= swordAtk + 3;
+                    player1.Hp -= axe.weaponDmg;
+                    enemy0.enemyHp -= sword.weaponDmg + 3;
                 }
                 else if (choice == "s" && enemyChoice == 2)
                 {
-                    player1.Hp -= lanceAtk + 3;
-                    enemy0.enemyHp -= swordAtk;
+                    player1.Hp -= lance.weaponDmg + 3;
+                    enemy0.enemyHp -= sword.weaponDmg;
                 }
                 else if (choice == "a" && enemyChoice == 0)
                 {
-                    player1.Hp -= swordAtk + 3;
-                    enemy0.enemyHp -= axeAtk;
+                    player1.Hp -= sword.weaponDmg + 3;
+                    enemy0.enemyHp -= axe.weaponDmg;
                 }
                 else if (choice == "a" && enemyChoice == 1)
                 {
-                    player1.Hp -= axeAtk;
-                    enemy0.enemyHp -= axeAtk;
+                    player1.Hp -= axe.weaponDmg;
+                    enemy0.enemyHp -= axe.weaponDmg;
                 }
                 else if (choice == "a" && enemyChoice == 2)
                 {
-                    player1.Hp -= lanceAtk;
-                    enemy0.enemyHp -= axeAtk + 3;
+                    player1.Hp -= lance.weaponDmg;
+                    enemy0.enemyHp -= axe.weaponDmg + 3;
                 }
                 else if (choice == "l" && enemyChoice == 0)
                 {
-                    player1.Hp -= swordAtk;
-                    enemy0.enemyHp -= lanceAtk + 3;
+                    player1.Hp -= sword.weaponDmg;
+                    enemy0.enemyHp -= lance.weaponDmg + 3;
                 }
                 else if (choice == "l" && enemyChoice == 1)
                 {
-                    player1.Hp -= axeAtk + 3;
-                    enemy0.enemyHp -= lanceAtk;
+                    player1.Hp -= axe.weaponDmg + 3;
+                    enemy0.enemyHp -= lance.weaponDmg;
                 }
                 else if (choice == "l" && enemyChoice == 2)
                 {
-                    player1.Hp -= lanceAtk;
-                    enemy0.enemyHp -= lanceAtk;
+                    player1.Hp -= lance.weaponDmg;
+                    enemy0.enemyHp -= lance.weaponDmg;
                 }
             }
 
