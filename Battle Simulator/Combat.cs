@@ -16,8 +16,6 @@ namespace Battle_Simulator
             Random random = new Random();
             int enemyChoice;
 
-            //use list here to reference each weapons. class for each weapon.
-
             Console.WriteLine("**************************************");
             Console.WriteLine("Welcome to Battle Simulator!");
             Console.WriteLine($"Reduce {enemy0.enemyName}'s HP to zero!");
@@ -25,7 +23,7 @@ namespace Battle_Simulator
             Console.WriteLine("Axe > Lance");
             Console.WriteLine("Lance > Sword");
             Console.WriteLine("");
-            //Console.WriteLine("");
+
             while (player1.Hp > 0 && enemy0.enemyHp > 0)
             {
                 enemyChoice = random.Next(0, 3);
@@ -154,10 +152,7 @@ namespace Battle_Simulator
     }
 }
 
-// add like a win and lose counter.
 // profile for character.
 // unit test
 // try to figure out a save feature?????????? *json*, text or log file
-// Console.clear(); to clear the console app instead of keeping all the history of the battles
-// Sword beats Axe, Axe beats Lance, and Lance beats Sword. Maybe add something more interesting for combat then just Rock Paper Scissors ?
 // class or list to define what happens when for example a sword attacks a sword... (dictionary)

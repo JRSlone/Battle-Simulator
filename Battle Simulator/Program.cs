@@ -9,6 +9,54 @@ namespace Battle_Simulator
         {
             Console.WriteLine("***********BATTLE SIMULATOR***********");
 
+            {
+                Console.WriteLine(string.Join("", readProfile("Joetest", "playerProfile.txt", 1)));
+                Console.ReadLine();
+            }
+
+
+            static string[] readProfile(string searchTerm, string filepath, int positionOfSearchTerm)
+            {
+                positionOfSearchTerm--;
+                string[] profileNotFound = { "Profile not found" };
+
+                try
+                {
+                    string[] lines = System.IO.File.ReadAllLines(@filepath);
+
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        string[] fields = lines[i].Split(',');
+                        if (profileMatches(searchTerm, fields, positionOfSearchTerm))
+                        {
+                            Console.WriteLine("Profile found");
+                            return fields;
+                        }
+                    }
+
+                    return profileNotFound;
+
+
+                }
+
+                catch(Exception ex)
+                {
+                    Console.WriteLine("There was an error");
+                    return profileNotFound;
+                    throw new ApplicationException("Thats an error:", ex);
+                }
+            }
+
+            static bool profileMatches(string searchTerm, string[] record, int positionOfSearchTerm)
+            {
+                if (record[positionOfSearchTerm].Equals(searchTerm))
+                {
+                    return true;
+                }
+                return false;
+            }
+
+
             Console.Write("Name your Character: ");
             String UserName = Console.ReadLine();
             Console.Write("Name your adversary: ");
@@ -34,8 +82,29 @@ namespace Battle_Simulator
 
             CombatSim.choice = "exit";
 
+            addProfile(UserName, EnemyName, CombatSim.winCount, CombatSim.enemyWinCount, "playerProfile.txt");
+
+            static void addProfile(string playerID, string enemyID, int playerWin, int enemyWin, string filepath)
+            {
+                try
+                {
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@filepath, true))
+                    {
+                        file.WriteLine($"{playerID}, {playerWin}, {enemyID}, {enemyWin}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new ApplicationException("Thats an error:", ex);
+                }
+            }
+
+
 
 
         }
     }
 }
+
+//try to load player profile with wins and losses
+//prompt user for wanting to load OR create a new game
