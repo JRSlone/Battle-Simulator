@@ -11,6 +11,11 @@ namespace Battle_Simulator
         public string choice;
         public int winCount = 0;
         public int enemyWinCount = 0;
+        public Combat(int WinCount = 0, int EnemyWinCount = 0)
+        {
+            winCount = WinCount;
+            enemyWinCount = EnemyWinCount;
+        }
         public void TurnCombat(Player player1, Enemy enemy0, SwordClass sword, AxeClass axe, LanceClass lance)
         {
             Random random = new Random();

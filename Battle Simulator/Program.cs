@@ -5,15 +5,28 @@ namespace Battle_Simulator
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            Combat CombatSim = new Combat();
+            string UserName = "";
+            string EnemyName = "";
+
             Console.WriteLine("***********BATTLE SIMULATOR***********");
 
-            {
-                Console.WriteLine(string.Join("", readProfile("Joetest", "playerProfile.txt", 1)));
-                Console.ReadLine();
-            }
+            Console.WriteLine("Would you like to load a profile?");
+            Console.WriteLine("Enter 'yes' to load a profile or 'no' to start a new game.");
+            string loadProfile = Console.ReadLine();
 
+            if (loadProfile == "yes")
+            {
+                Console.WriteLine("Please enter your saved character name");
+                string userProfile = Console.ReadLine();
+                string[] profile = readProfile(userProfile, "playerProfile.txt", 1);
+                UserName = profile[0];
+                EnemyName = profile[2];
+                Console.ReadLine();
+                CombatSim = new Combat(int.Parse(profile[1]), int.Parse(profile[3]));
+            }
 
             static string[] readProfile(string searchTerm, string filepath, int positionOfSearchTerm)
             {
@@ -56,18 +69,20 @@ namespace Battle_Simulator
                 return false;
             }
 
-
-            Console.Write("Name your Character: ");
-            String UserName = Console.ReadLine();
-            Console.Write("Name your adversary: ");
-            String EnemyName = Console.ReadLine();
+            if (loadProfile == "no")
+            {
+                Console.Write("Name your Character: ");
+                UserName = Console.ReadLine();
+                Console.Write("Name your adversary: ");
+                EnemyName = Console.ReadLine();
+                CombatSim = new Combat();
+            }
 
             Player player1 = new Player(UserName, 50);
             Enemy enemy0 = new Enemy(EnemyName, 50);
             SwordClass sword = new SwordClass("sword", 5);
             AxeClass axe = new AxeClass("axe", 5);
             LanceClass lance = new LanceClass("lance", 5);
-            Combat CombatSim = new Combat();
 
             while (CombatSim.choice != "exit")
             {
@@ -90,7 +105,7 @@ namespace Battle_Simulator
                 {
                     using (System.IO.StreamWriter file = new System.IO.StreamWriter(@filepath, true))
                     {
-                        file.WriteLine($"{playerID}, {playerWin}, {enemyID}, {enemyWin}");
+                        file.WriteLine($"{playerID},{playerWin},{enemyID},{enemyWin}");
                     }
                 }
                 catch (Exception ex)
@@ -106,5 +121,4 @@ namespace Battle_Simulator
     }
 }
 
-//try to load player profile with wins and losses
-//prompt user for wanting to load OR create a new game
+// overwrite text file after loaded data is saved again?
