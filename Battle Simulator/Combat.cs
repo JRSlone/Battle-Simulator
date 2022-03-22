@@ -157,7 +157,3 @@ namespace Battle_Simulator
     }
 }
 
-// profile for character.
-// unit test
-// try to figure out a save feature?????????? *json*, text or log file
-// class or list to define what happens when for example a sword attacks a sword... (dictionary)
