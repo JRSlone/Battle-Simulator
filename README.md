@@ -6,3 +6,4 @@ The 3+ additional features I selected were as follows:
 - Implement a “master loop” console application where the user can repeatedly enter commands/perform actions, including choosing to exit the program.
 - Create an additional class which inherits one or more properties from its parent.
 - Read data from an external file, such as text, JSON, CSV, etc and use that data in your application
+- Calculate and display data based on an external factor (ex: get the current date, and display how many days remaining until some event)
