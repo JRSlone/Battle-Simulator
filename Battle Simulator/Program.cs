@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Battle_Simulator
 {
@@ -23,6 +22,7 @@ namespace Battle_Simulator
                 string userProfile = Console.ReadLine();
                 string[] profile = readProfile(userProfile, "playerProfile.txt", 1);
                 UserName = profile[0];
+                Console.WriteLine("---Press 'Enter' to load the saved profile.---");
                 EnemyName = profile[2];
                 Console.ReadLine();
                 CombatSim = new Combat(int.Parse(profile[1]), int.Parse(profile[3]));
@@ -48,8 +48,6 @@ namespace Battle_Simulator
                     }
 
                     return profileNotFound;
-
-
                 }
 
                 catch(Exception ex)
@@ -120,5 +118,3 @@ namespace Battle_Simulator
         }
     }
 }
-
-// overwrite text file after loaded data is saved again?
