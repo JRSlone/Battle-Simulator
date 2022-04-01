@@ -9,6 +9,7 @@ namespace Battle_Simulator
             Combat CombatSim = new Combat();
             string UserName = "";
             string EnemyName = "";
+            var userEntry = "";
 
             Restart:
             Console.WriteLine("***********BATTLE SIMULATOR***********");
@@ -18,11 +19,12 @@ namespace Battle_Simulator
             Console.WriteLine("Enter 'yes' to load a profile or 'no' to start a new game.");
             string loadProfile = Console.ReadLine();
 
-            if (loadProfile == "yes") //Typing a profile that doesnt exist will break it... not sure how to resolve atm
-                // also only will pull the earliest saved data... please be enough to pass :D
+            if (loadProfile == "yes")
             {
-                while (UserName == "" && EnemyName == "")
+                while (UserName == "" && EnemyName == "" && userEntry != "exit")
                 {
+
+
                     Console.WriteLine("Please enter your saved character name");
                     string userProfile = Console.ReadLine();
                     string[] profile = readProfile(userProfile, "playerProfile.txt", 1);
@@ -31,9 +33,18 @@ namespace Battle_Simulator
                         UserName = profile[0];
                         EnemyName = profile[2];
                         CombatSim = new Combat(int.Parse(profile[1]), int.Parse(profile[3]));
+                        Console.WriteLine("");
+                        Console.WriteLine("---Press 'Enter' to load the saved profile.---");
+                        Console.ReadLine();
                     }
-                    Console.WriteLine("---Press 'Enter' to load the saved profile.---");
-                    Console.ReadLine();
+                    else
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("Invalid Entry, press Enter to try again");
+                        Console.WriteLine("or type 'exit' to end to application");
+                        Console.WriteLine("");
+                        userEntry = Console.ReadLine();
+                    }
                 }
             }
             else if (loadProfile == "no")
@@ -65,7 +76,7 @@ namespace Battle_Simulator
                         string[] fields = lines[i].Split(',');
                         if (profileMatches(searchTerm, fields, positionOfSearchTerm))
                         {
-                            Console.WriteLine("Profile found");
+                            Console.WriteLine("---Profile found---");
                             return fields;
                         }
                     }
@@ -89,7 +100,7 @@ namespace Battle_Simulator
             AxeClass axe = new AxeClass("axe", 5);
             LanceClass lance = new LanceClass("lance", 5);
 
-            while (CombatSim.choice != "exit")
+            while (CombatSim.choice != "exit" && UserName != "")
             {
                 player1.Hp = 50;
                 enemy0.enemyHp = 50;
