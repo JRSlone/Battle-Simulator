@@ -10,6 +10,7 @@ namespace Battle_Simulator
             string UserName = "";
             string EnemyName = "";
 
+            Restart:
             Console.WriteLine("***********BATTLE SIMULATOR***********");
 
             Console.WriteLine("Would you like to load a profile?");
@@ -20,14 +21,35 @@ namespace Battle_Simulator
             if (loadProfile == "yes") //Typing a profile that doesnt exist will break it... not sure how to resolve atm
                 // also only will pull the earliest saved data... please be enough to pass :D
             {
-                Console.WriteLine("Please enter your saved character name");
-                string userProfile = Console.ReadLine();
-                string[] profile = readProfile(userProfile, "playerProfile.txt", 1);
-                UserName = profile[0];
-                EnemyName = profile[2];
-                Console.WriteLine("---Press 'Enter' to load the saved profile.---");
-                Console.ReadLine();
-                CombatSim = new Combat(int.Parse(profile[1]), int.Parse(profile[3]));
+                while (UserName == "" && EnemyName == "")
+                {
+                    Console.WriteLine("Please enter your saved character name");
+                    string userProfile = Console.ReadLine();
+                    string[] profile = readProfile(userProfile, "playerProfile.txt", 1);
+                    if (profile != null && profile[0] != "")
+                    {
+                        UserName = profile[0];
+                        EnemyName = profile[2];
+                        CombatSim = new Combat(int.Parse(profile[1]), int.Parse(profile[3]));
+                    }
+                    Console.WriteLine("---Press 'Enter' to load the saved profile.---");
+                    Console.ReadLine();
+                }
+            }
+            else if (loadProfile == "no")
+            {
+                Console.Write("Name your Character: ");
+                UserName = Console.ReadLine();
+                Console.Write("Name your adversary: ");
+                EnemyName = Console.ReadLine();
+                CombatSim = new Combat();
+            }
+            else
+            {
+                Console.WriteLine("Invalid Entry, Restarting Application");
+                Console.WriteLine("");
+                Console.WriteLine("");
+                goto Restart;
             }
 
             static string[] readProfile(string searchTerm, string filepath, int positionOfSearchTerm)
@@ -35,7 +57,6 @@ namespace Battle_Simulator
                 positionOfSearchTerm--;
                 string[] profileNotFound = { "Profile not found" };
 
-                try
                 {
                     string[] lines = System.IO.File.ReadAllLines(@filepath);
 
@@ -48,15 +69,9 @@ namespace Battle_Simulator
                             return fields;
                         }
                     }
-                    return profileNotFound;
+                    return null;
                 }
 
-                catch (Exception ex)
-                {
-                    Console.WriteLine("There was an error");
-                    return profileNotFound;
-                    throw new ApplicationException("Thats an error:", ex);
-                }
             }
 
             static bool profileMatches(string searchTerm, string[] record, int positionOfSearchTerm)
@@ -66,15 +81,6 @@ namespace Battle_Simulator
                     return true;
                 }
                 return false;
-            }
-
-            if (loadProfile == "no")
-            {
-                Console.Write("Name your Character: ");
-                UserName = Console.ReadLine();
-                Console.Write("Name your adversary: ");
-                EnemyName = Console.ReadLine();
-                CombatSim = new Combat();
             }
 
             Player player1 = new Player(UserName, 50);
