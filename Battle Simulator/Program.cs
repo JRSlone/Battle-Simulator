@@ -13,17 +13,19 @@ namespace Battle_Simulator
             Console.WriteLine("***********BATTLE SIMULATOR***********");
 
             Console.WriteLine("Would you like to load a profile?");
+            Console.WriteLine("If this is your first game type 'no'");
             Console.WriteLine("Enter 'yes' to load a profile or 'no' to start a new game.");
             string loadProfile = Console.ReadLine();
 
-            if (loadProfile == "yes")
+            if (loadProfile == "yes") //Typing a profile that doesnt exist will break it... not sure how to resolve atm
+                // also only will pull the earliest saved data... please be enough to pass :D
             {
                 Console.WriteLine("Please enter your saved character name");
                 string userProfile = Console.ReadLine();
                 string[] profile = readProfile(userProfile, "playerProfile.txt", 1);
                 UserName = profile[0];
-                Console.WriteLine("---Press 'Enter' to load the saved profile.---");
                 EnemyName = profile[2];
+                Console.WriteLine("---Press 'Enter' to load the saved profile.---");
                 Console.ReadLine();
                 CombatSim = new Combat(int.Parse(profile[1]), int.Parse(profile[3]));
             }
@@ -46,11 +48,10 @@ namespace Battle_Simulator
                             return fields;
                         }
                     }
-
                     return profileNotFound;
                 }
 
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine("There was an error");
                     return profileNotFound;
@@ -88,7 +89,8 @@ namespace Battle_Simulator
                 enemy0.enemyHp = 50;
                 CombatSim.TurnCombat(player1, enemy0, sword, axe, lance);
                
-                Console.WriteLine("To play again press any button, or type 'exit' to Exit: ");
+                Console.WriteLine("To play again press Enter, or type 'exit' then Enter to Exit the Program: ");
+                Console.WriteLine("Typing 'exit' will save your profile, this can be loaded when starting the program again.");
                 CombatSim.choice = Console.ReadLine();
 
             }
